@@ -6,7 +6,7 @@
             </a>
         </x-slot>
 
-        <h2 class="py-2 text-xl font-bold">Register as Buyer</h2>
+        <h2 class="py-2 text-xl font-bold">Register as Farmer</h2>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />

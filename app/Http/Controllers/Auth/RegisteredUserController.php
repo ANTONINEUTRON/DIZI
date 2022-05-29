@@ -18,9 +18,23 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function createBuyerAccount()
     {
         return view('auth.register');
+    }
+
+    public function createTransporterAccount()
+    {
+        return view('auth.register-transporter');
+    }
+
+    public function createAdminAccount()
+    {
+        return view('auth.register-admin');
+    }
+
+    public function createFarmerAccount(){
+        return view('auth.register-farmer');
     }
 
     /**
@@ -33,22 +47,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        //Validate the path the user used in registering and match against role returned
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'numeric', 'min:10', 'unique:users'],
+            'role' => ['required', 'string', 'max:15']
         ]);
+
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'role' => $request->role
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        //redirect accordingly
+        
+        return redirect()->route(RouteServiceProvider::getApproprieteRoute());
     }
 }

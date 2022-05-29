@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,21 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
+
+    public static function getApproprieteRoute(){
+        $role = Auth::user()->role;
+        if($role == "admin"){
+            return 'admin/dashboard';
+        }elseif($role == "transporter"){
+            return 'transporter/dashboard';
+        }elseif($role == "buyer"){
+            return 'buyer/dashboard';
+        }elseif($role == "farmer"){
+            return 'farmer/dashboard';
+        }else{
+            return "/";
+        }
+    }
 
     /**
      * The controller namespace for the application.

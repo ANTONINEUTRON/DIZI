@@ -6,7 +6,7 @@
             </a>
         </x-slot>
 
-        <h2 class="py-2 text-xl font-bold">Register as Buyer</h2>
+        <h2 class="py-2 text-xl font-bold">Register as Farmer</h2>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -56,7 +56,7 @@
 
             <div class="mt-4 invisible">
                 
-                <x-input class="block mt-1 w-full" type="hidden" name="role" :value="__('buyer')" required />
+                <x-input class="block mt-1 w-full" type="hidden" name="role" :value="__('farmer')" required />
             </div>
 
             <div class="flex items-center justify-end mt-4">

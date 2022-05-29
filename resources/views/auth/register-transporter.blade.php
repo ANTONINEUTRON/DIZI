@@ -6,7 +6,7 @@
             </a>
         </x-slot>
 
-        <h2 class="py-2 text-xl font-bold">Register as Buyer</h2>
+        <h2 class="py-2 text-xl font-bold">Register as Transporter</h2>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -21,6 +21,7 @@
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
+            
             <!-- Phone Number -->
             <div class="mt-4">
                 <x-label for="phone" :value="__('Phone')" />
@@ -28,11 +29,19 @@
                 <x-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required />
             </div>
 
+
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email (optional)')" />
+                <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+            
+            <!-- Location -->
+            <div class="mt-4">
+                <x-label for="location" :value="__('Location <i>show as select later</i>')" />
+
+                <x-input id="location" class="block mt-1 w-full" type="text" name="location" :value="old('location')" required />
             </div>
 
             <!-- Password -->
@@ -53,11 +62,11 @@
                                 type="password"
                                 name="password_confirmation" required />
             </div>
-
             <div class="mt-4 invisible">
                 
-                <x-input class="block mt-1 w-full" type="hidden" name="role" :value="__('buyer')" required />
+                <x-input class="block mt-1 w-full" type="hidden" name="role" :value="__('transporter')" required />
             </div>
+
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
